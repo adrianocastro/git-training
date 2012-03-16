@@ -8,7 +8,7 @@
     - viewing and understanding the logs
     - tips and tricks (prompt, aliasing, colours)
 
-## Session 2: Undoing things (I'll take this one)
+## Session 2: Undoing things (Matt)
     - undoing staging
     - reverting changes
     - stashing files
