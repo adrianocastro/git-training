@@ -1,5 +1,5 @@
 # The git sessions
-## Session 1: The Basics
+## Session 1: The Basics (Adriano)
     - what's git?
     - how is it different from svn?
     - installation and configuration (name, email)
