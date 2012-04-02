@@ -226,11 +226,13 @@ Git stages a file exactly as it is when you run the `git add` command. If you co
 
     $ git diff
     diff --git a/README b/README
-    index e69de29..f5320a7 100644
+    index 627b264..75a69aa 100644
     --- a/README
     +++ b/README
-    @@ -0,0 +1 @@
-    +This is my Git training repository.
+    @@ -1,2 +1,3 @@
+     This is my Git training repository.
+     --castroad
+    +Mon Apr 2 15:02:28 PDT 2012
     diff --git a/hello b/hello
     index e69de29..f534deb 100644
     --- a/hello
@@ -254,15 +256,31 @@ To see the changes in staged files:
 
     $ git diff --staged
     diff --git a/README b/README
-    index e69de29..f5320a7 100644
+    index 627b264..75a69aa 100644
     --- a/README
     +++ b/README
-    @@ -0,0 +1 @@
-    +This is my Git training repository.
+    @@ -1,2 +1,3 @@
+     This is my Git training repository.
+     --castroad
+    +Mon Apr 2 15:02:28 PDT 2012
 
 To see all changes:
 
     $ git diff HEAD
+    diff --git a/README b/README
+    index 627b264..75a69aa 100644
+    --- a/README
+    +++ b/README
+    @@ -1,2 +1,3 @@
+     This is my Git training repository.
+     --castroad
+    +Mon Apr 2 15:02:28 PDT 2012
+    diff --git a/hello b/hello
+    index e69de29..f534deb 100644
+    --- a/hello
+    +++ b/hello
+    @@ -0,0 +1 @@
+    +Hello World.
 
 Where `HEAD` points to the latest commit (the tip of the branch you’re in).
 
@@ -297,17 +315,25 @@ Move and delete operations are performed on tracked files so they are automatica
 ### Viewing the commit history
 
     $ git log
-    commit fd1cadc7a2abf331e0ea2a41b9e781950438a4c3
+    commit b736ad1d23ea8449e7cadd8a0c738bfd8dd0049c
     Author: castroad <castroad@yahoo-inc.com>
-    Date:   Mon Apr 2 12:51:00 2012 -0700
+    Date:   Mon Apr 2 15:05:21 2012 -0700
 
         Renamed README and deleted hello.
 
-    commit 57faee4d438a31d63fd3dbfece70af9446e07928
+    commit 4ff1af9ac2eae232d732b801a227c66c132a3543
     Author: castroad <castroad@yahoo-inc.com>
-    Date:   Mon Apr 2 12:49:39 2012 -0700
+    Date:   Mon Apr 2 15:05:02 2012 -0700
 
         Added a date to README and 'hello world' to hello.
+
+    commit b80e06b60b7db9db9c8e29cd2afad813e84ed444
+    Author: castroad <castroad@yahoo-inc.com>
+    Date:   Mon Apr 2 15:02:25 2012 -0700
+
+        Added some notes to README.
+
+    (…)
 
 To view the actual changes (for patching, code reviews, etc):
 
@@ -323,25 +349,25 @@ Other options:
 ### Inspecting specific commits
 
     $ git log --oneline
-    22021a3 Renamed README and deleted hello.
-    2f5cd24 Added a date to README and 'hello world' to hello.
-    ba954b2 Added some notes to README.
-    e6c1b31 Added hello.
-    f163019 Added README.
+    b736ad1 Renamed README and deleted hello.
+    4ff1af9 Added a date to README and 'hello world' to hello.
+    b80e06b Added some notes to README.
+    5de611b Added hello.
+    ed7d7ff Added README.
 
-    $ git show 2f5cd24
+    $ git show 4ff1af9
     (…)
 
 #### Viewing diffs between specific commits
 
     $ git log --oneline
-    22021a3 Renamed README and deleted hello.
-    2f5cd24 Added a date to README and 'hello world' to hello.
-    ba954b2 Added some notes to README.
-    e6c1b31 Added hello.
-    f163019 Added README.
+    b736ad1 Renamed README and deleted hello.
+    4ff1af9 Added a date to README and 'hello world' to hello.
+    b80e06b Added some notes to README.
+    5de611b Added hello.
+    ed7d7ff Added README.
 
-    $ git diff ba954b2..2f5cd24
+    $ git diff b80e06b..4ff1af9
     (…)
 
 
