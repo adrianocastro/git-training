@@ -1,0 +1,13 @@
+- Tips and tricks
+http://progit.org/book/ch1-5.html
+git config --global merge.tool vimdiff
+git config --list
+/etc/gitconfig
+~/.gitconfig
+.git/config
+
+Ignoring Files, http://progit.org/book/ch2-2.html
+
+| SVN            | git           |
+| :------------: | :-----------: |
+| centralised          | distributed    |
