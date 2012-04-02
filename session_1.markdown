@@ -69,7 +69,7 @@ Try it:
     $ git config --global user.email `whoami`@yahoo-inc.com
 
     # Make it look pretty
-    $ git config color.ui true
+    $ git config --global color.ui true
 
 Note: in normal situations `user.name` would be your actual name but at Y! it has to be your Y!ID.
 
