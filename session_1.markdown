@@ -379,6 +379,10 @@ Interactively:
     $ git <verb> --help
     $ man git-<verb>
 
+IRC:
+
+- #zed-git @ irc.corp.yahoo.com
+
 Online:
 
 - http://gitref.org/
