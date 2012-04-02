@@ -9,8 +9,10 @@
     - tips and tricks (prompt, aliasing, colours)
 
 ## Session 2: Undoing things (Matt M.)
-    - undoing staging
+    - changing the last commit
+    - unstaging files
     - reverting changes
+    - reverting to a previous commit
     - stashing files
 
 ## Session 3: Branching and Merging
