@@ -11,11 +11,11 @@
 
 ### Git !== GitHub
 
-- <q>**Git** is an extremely fast, efficient, distributed version control system ideal for the collaborative development of software</q> [^git_vs_github]
-- <q>**GitHub** is the best way to collaborate with others. Fork, send pull requests and manage all your public and private Git repositories.</q> [^git_vs_github]
+- <q>**Git** is an extremely fast, efficient, distributed version control system ideal for the collaborative development of software</q> [^git-vs-github]
+- <q>**GitHub** is the best way to collaborate with others. Fork, send pull requests and manage all your public and private Git repositories.</q> [^git-vs-github]
     - think of it as SVN viewer, bugzilla and codereview.corp combined
 
-[^git_vs_github]: https://github.com/
+[^git-vs-github]: https://github.com/
 
 ### How is it different from SVN?
 - **SVN** is a **centralised** version control system
@@ -65,8 +65,8 @@ Try it:
 
 #### Configuration
 
-    $ git config --global user.name `whoami`
-    $ git config --global user.email `whoami`@yahoo-inc.com
+    $ git config --global user.name $USER
+    $ git config --global user.email $USER@yahoo-inc.com
 
     # Make it look pretty
     $ git config --global color.ui true
@@ -85,7 +85,7 @@ Note: in normal situations `user.name` would be your actual name but at Y! it ha
 
 Git will reply: `Initialized empty Git repository in .git/`
 
-### What’s in the .git directory
+#### What’s in the .git directory
 
 - `.git/` is where Git stores the metadata and object database for the repository
 - We’ll come back to it later
@@ -105,7 +105,7 @@ Git will reply: `Initialized empty Git repository in .git/`
     #   README
     nothing added to commit but untracked files present (use "git add" to track)
 
-### The four states
+#### The four states
 
 - **untracked**
     - file isn’t under version control
@@ -118,7 +118,7 @@ Git will reply: `Initialized empty Git repository in .git/`
 
 ![The lifecycle of the status of your files](http://progit.org/figures/ch2/18333fig0201-tn.png)
 
-### The three sections
+#### The three sections
 
 - **git directory**
     - where **committed** files live
@@ -191,7 +191,7 @@ Where:
 
 **Heads up:** If you make another change to the file:
 
-    $ echo "--`whoami`" >> README
+    $ echo "-- $USER" >> README
     $ git status
     # On branch master
     # Changes to be committed:
@@ -381,11 +381,11 @@ Interactively:
 
 IRC:
 
-- #zed-git @ irc.corp.yahoo.com
+- [#zed-git](http://irc.corp.yahoo.com/join/zed-git) @ [irc.corp.yahoo.com](irc://irc.corp.yahoo.com/)
 
 Online:
 
-- http://gitref.org/
-- http://book.git-scm.com/
-- http://gitready.com/
-- http://progit.org/
+- [Git Reference](http://gitref.org/)
+- [Git Community Book](http://book.git-scm.com/)
+- [git ready](http://gitready.com/)
+- [Pro Git](http://progit.org/)
