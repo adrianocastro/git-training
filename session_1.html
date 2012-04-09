@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <style>html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+body{
+  color:#444;
+  font-family:Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+  font-size:12px;
+  line-height:1.5em;
+  background:#fefefe;
+  width: 45em;
+  margin: 80px auto;
+  padding: 5em 5em;
+  outline: 1300px solid #FAFAFA;
+}
+
+a{ color: #0645ad; text-decoration:none;}
+a:visited{ color: #0b0080; }
+a:hover{ color: #06e; }
+a:active{ color:#faa700; }
+a:focus{ outline: thin dotted; }
+a:hover, a:active{ outline: 0; }
+
+span.backtick {
+  border:1px solid #EAEAEA;
+  border-radius:3px;
+  background:#F8F8F8;
+  padding:0px 3px 0px 3px;
+}
+
+::-moz-selection{background:rgba(255,255,0,0.3);color:#000}
+::selection{background:rgba(255,255,0,0.3);color:#000}
+
+a::-moz-selection{background:rgba(255,255,0,0.3);color:#0645ad}
+a::selection{background:rgba(255,255,0,0.3);color:#0645ad}
+
+p{
+margin:1em 0;
+}
+
+img{
+max-width:100%;
+}
+
+h1,h2,h3,h4,h5,h6{
+font-weight:normal;
+color:#111;
+line-height:1em;
+}
+h4,h5,h6{ font-weight: bold; }
+h1{ font-size:2.5em; }
+h2{ font-size:2em; }
+h3{ font-size:1.5em; }
+h4{ font-size:1.2em; }
+h5{ font-size:1em; }
+h6{ font-size:0.9em; }
+
+blockquote{
+color:#666666;
+margin:0;
+padding-left: 3em;
+border-left: 0.5em #EEE solid;
+}
+hr { display: block; height: 2px; border: 0; border-top: 1px solid #aaa;border-bottom: 1px solid #eee; margin: 1em 0; padding: 0; }
+
+
+pre , code, kbd, samp {
+  color: #000;
+  font-family: monospace;
+  font-size: 0.98em;
+  border-radius:3px;
+  background-color: #F8F8F8;
+  border: 1px solid #CCC;
+}
+pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; padding: 5px;}
+pre code { border: 0px !important; }
+
+
+b, strong { font-weight: bold; }
+
+dfn { font-style: italic; }
+
+ins { background: #ff9; color: #000; text-decoration: none; }
+
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+ul, ol { margin: 1em 0; padding: 0 0 0 2em; }
+li p:last-child { margin:0 }
+dd { margin: 0 0 0 2em; }
+
+img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+td { vertical-align: top; }
+
+@media only screen and (min-width: 480px) {
+body{font-size:14px;}
+}
+
+@media only screen and (min-width: 768px) {
+body{font-size:16px;}
+}
+
+@media print {
+  * { background: transparent !important; color: black !important; filter:none !important; -ms-filter: none !important; }
+  body{font-size:12pt; max-width:100%;}
+  a, a:visited { text-decoration: underline; }
+  hr { height: 1px; border:0; border-bottom:1px solid black; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid #999; padding-right: 1em; page-break-inside: avoid; }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page :left { margin: 15mm 20mm 15mm 10mm; }
+  @page :right { margin: 15mm 10mm 15mm 20mm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}</style>
+</head>
+<body>
+
+<h1>The Git sessions</h1>
+<h2>Session 1: The Basics</h2>
+<h3>What's Git?</h3>
+<ul>
+<li>version control system</li>
+<li>open source</li>
+<li><q>created by the same dudes that created Linux</q> <a href="http://help.github.com/mac-set-up-git/">^github-intro</a></li>
+<li><q>At the heart of GitHub</q> <a href="http://help.github.com/mac-set-up-git/">^github-intro</a> <small>(this will make sense later)</small></li>
+</ul>
+<h3>Git !== GitHub</h3>
+<ul>
+<li><q><strong>Git</strong> is an extremely fast, efficient, distributed version control system ideal for the collaborative development of software</q> <a href="https://github.com/">^git-vs-github</a></li>
+<li><q><strong>GitHub</strong> is the best way to collaborate with others. Fork, send pull requests and manage all your public and private Git repositories.</q> <a href="https://github.com/">^git-vs-github</a><ul>
+<li>think of it as SVN viewer, bugzilla and codereview.corp combined</li>
+</ul>
+</li>
+</ul>
+<h3>How is it different from SVN?</h3>
+<ul>
+<li><strong>SVN</strong> is a <strong>centralised</strong> version control system<ul>
+<li>everyone contributes to a single repository</li>
+</ul>
+</li>
+<li><strong>Git</strong> is a <strong>distributed</strong> version control system<ul>
+<li>each clone is a full mirror of the repository</li>
+<li>you can contribute to multiple repositories</li>
+</ul>
+</li>
+</ul>
+<p>Read more about the <a href="http://progit.org/book/ch1-1.html">different types of version control systems</a>.</p>
+<h3>Centralized VCS</h3>
+<p><img alt="Centralized version control diagram" src="http://progit.org/figures/ch1/18333fig0102-tn.png" /></p>
+<h3>Distributed VCS</h3>
+<p><img alt="Distributed version control diagram" src="http://progit.org/figures/ch1/18333fig0103-tn.png" /></p>
+<h3>Distributed? Wait. What?!</h3>
+<ul>
+<li>each clone is a full mirror of the repository</li>
+<li>works offline<ul>
+<li>works even when the repository you push to is down</li>
+</ul>
+</li>
+<li>works very well with several remote repositories</li>
+<li>fast because most operations are run locally</li>
+<li>branching is easy and even encouraged</li>
+<li>merging is much easier</li>
+<li>allows for better collaboration across teams</li>
+</ul>
+<h3>How does all of this translate into every day coding?</h3>
+<ul>
+<li>commit early, commit often, commit without fear<ul>
+<li>key changes are versioned and safe</li>
+</ul>
+</li>
+<li>branch for features</li>
+<li>branch for experiments</li>
+<li>branch for testing</li>
+<li>collaborate with others<ul>
+<li>no more sharing code on pastebin, email or ping</li>
+</ul>
+</li>
+</ul>
+<h3>Installation and configuration (name, email)</h3>
+<h4>Getting Git</h4>
+<ul>
+<li>at Y!: <span class="backtick">$ yinst i git_core_y</span></li>
+<li>everywhere else: <a href="http://progit.org/book/ch1-4.html">see instructions in Pro Git</a></li>
+</ul>
+<p>Try it:</p>
+<pre><code>$ git
+</code></pre>
+<h4>Configuration</h4>
+<pre><code>$ git config --global user.name $USER
+$ git config --global user.email $USER@yahoo-inc.com
+
+# Make it look pretty
+$ git config --global color.ui true
+</code></pre>
+<p>Note: in normal situations <span class="backtick">user.name</span> would be your actual name but at Y! it has to be your Y!ID.</p>
+<h3>Creating your first Git repository</h3>
+<pre><code>$ mkdir ~/git-training
+$ cd ~/git-training
+
+# this will initialise the git-training directory
+# as a git repository
+
+$ git init
+</code></pre>
+<p>Git will reply: <span class="backtick">Initialized empty Git repository in .git/</span></p>
+<h4>What’s in the .git directory</h4>
+<ul>
+<li><span class="backtick">.git/</span> is where Git stores the metadata and object database for the repository</li>
+<li>We’ll come back to it later</li>
+</ul>
+<h3>Checking the status of the repository</h3>
+<pre><code>$ git status
+# Nothing to commit
+
+$ touch README
+
+$ git status
+(…)
+# Untracked files:
+#   (use "git add &lt;file&gt;..." to include in what will be committed)
+#
+#   README
+nothing added to commit but untracked files present (use "git add" to track)
+</code></pre>
+<h4>The four states</h4>
+<ul>
+<li><strong>untracked</strong><ul>
+<li>file isn’t under version control</li>
+</ul>
+</li>
+<li><strong>committed</strong> (unmodified)<ul>
+<li>file is safely stored in the repository’s database</li>
+</ul>
+</li>
+<li><strong>modified</strong><ul>
+<li>file has changed but hasn’t been committed yet</li>
+</ul>
+</li>
+<li><strong>staged</strong><ul>
+<li>modified file has been marked in its current version as ready to be committed</li>
+</ul>
+</li>
+</ul>
+<p><img alt="The lifecycle of the status of your files" src="http://progit.org/figures/ch2/18333fig0201-tn.png" /></p>
+<h4>The three sections</h4>
+<ul>
+<li><strong>git directory</strong><ul>
+<li>where <strong>committed</strong> files live</li>
+</ul>
+</li>
+<li><strong>working directory</strong><ul>
+<li>where <strong>modified</strong> and <strong>untracked</strong> files live</li>
+</ul>
+</li>
+<li><strong>staging</strong> (aka index)<ul>
+<li>where <strong>staged</strong> files live</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Working directory, staging area, and git directory" src="http://progit.org/figures/ch1/18333fig0106-tn.png" /></p>
+<h3>Adding files</h3>
+<pre><code>$ git add README
+$ git status
+(…)
+# Changes to be committed:
+#   (use "git rm --cached &lt;file&gt;..." to unstage)
+#
+#   new file:   README
+</code></pre>
+<h3>Committing files</h3>
+<pre><code>$ git commit
+
+# Or with an inline commit message
+$ git commit -m 'Added README.'
+
+[master (root-commit) 454a516] Added README.
+ 0 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 README
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><span class="backtick">master</span> is the branch the file was committed to</li>
+<li><span class="backtick">454a516</span> is the SHA-1 checksum which uniquely identifies the commit</li>
+<li><span class="backtick">0 files changed, 0 insertions(+), 0 deletions(-)</span> because the file was empty and git is looking at the file’s contents</li>
+<li><span class="backtick">mode 100644 README</span> because the file was added with <span class="backtick">644</span> permissions, i.e. world readable but only writeable by the owner (<span class="backtick">rw-r--r--</span>)</li>
+</ul>
+<h3>Staging and committing files selectively</h3>
+<pre><code>$ echo 'This is my Git training repository.' &gt; README
+$ touch hello
+
+$ git status
+# On branch master
+# Changed but not updated:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#       modified:   README
+#
+# Untracked files:
+#   (use "git add &lt;file&gt;..." to include in what will be committed)
+#
+#       hello
+no changes added to commit (use "git add" and/or "git commit -a")
+$ git add hello
+$ git commit -m "Added hello."
+</code></pre>
+<h3>Staging modified files</h3>
+<pre><code>$ git add README
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)
+#
+#       modified:   README
+#
+</code></pre>
+<p><strong>Heads up:</strong> If you make another change to the file:</p>
+<pre><code>$ echo "-- $USER" &gt;&gt; README
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)
+#
+#       modified:   README
+#
+# Changed but not updated:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#       modified:   README
+#
+</code></pre>
+<p>Now <span class="backtick">README</span> is listed as <strong>both staged and unstaged</strong>.</p>
+<p>Git stages a file exactly as it is when you run the <span class="backtick">git add</span> command. If you commit now, the version of <span class="backtick">README</span> as it was when you last ran the git add command is how it will go into the commit, not the version of the file as it looks in your working directory when you run <span class="backtick">git commit</span>. If you modify a file after you run <span class="backtick">git add</span>, you have to run <span class="backtick">git add</span> again to stage the latest version of the file:</p>
+<pre><code>$ git add README
+$ git commit -m "Added some notes to README."
+[master dc1ae3d] Added some notes to README.
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+</code></pre>
+<h3>Viewing your changes</h3>
+<pre><code>$ echo `date` &gt;&gt; README
+$ echo 'Hello World.' &gt; hello
+
+$ git status -s   # -s for short output
+ M README
+ M hello
+
+$ git diff
+diff --git a/README b/README
+index 627b264..75a69aa 100644
+--- a/README
++++ b/README
+@@ -1,2 +1,3 @@
+ This is my Git training repository.
+ --castroad
++Mon Apr 2 15:02:28 PDT 2012
+diff --git a/hello b/hello
+index e69de29..f534deb 100644
+--- a/hello
++++ b/hello
+@@ -0,0 +1 @@
++Hello World.
+</code></pre>
+<h3>Viewing your changes in stage and HEAD</h3>
+<pre><code>$ git add README
+
+$ git diff
+diff --git a/hello b/hello
+index e69de29..f534deb 100644
+--- a/hello
++++ b/hello
+@@ -0,0 +1 @@
++Hello World.
+</code></pre>
+<p>To see the changes in staged files:</p>
+<pre><code>$ git diff --staged
+diff --git a/README b/README
+index 627b264..75a69aa 100644
+--- a/README
++++ b/README
+@@ -1,2 +1,3 @@
+ This is my Git training repository.
+ --castroad
++Mon Apr 2 15:02:28 PDT 2012
+</code></pre>
+<p>To see all changes:</p>
+<pre><code>$ git diff HEAD
+diff --git a/README b/README
+index 627b264..75a69aa 100644
+--- a/README
++++ b/README
+@@ -1,2 +1,3 @@
+ This is my Git training repository.
+ --castroad
++Mon Apr 2 15:02:28 PDT 2012
+diff --git a/hello b/hello
+index e69de29..f534deb 100644
+--- a/hello
++++ b/hello
+@@ -0,0 +1 @@
++Hello World.
+</code></pre>
+<p>Where <span class="backtick">HEAD</span> points to the latest commit (the tip of the branch you’re in).</p>
+<h3>Skipping the staging area</h3>
+<p>Sometimes you don’t need the fine grain control the staging area offers and just want to commit all the files you’ve changed.</p>
+<pre><code>$ git status -s
+M  README
+ M hello
+
+$ git commit -a -m "Added a date to README and 'hello world' to hello."
+</code></pre>
+<h3>Moving and deleting files</h3>
+<pre><code>$ git mv README README.txt
+$ git rm hello
+</code></pre>
+<p>Move and delete operations are performed on tracked files so they are automatically staged. Don’t forget to commit the changes.</p>
+<pre><code>$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)
+#
+#       renamed:    README -&gt; README.txt
+#       deleted:    hello
+#
+
+$ git commit -m "Renamed README and deleted hello."
+</code></pre>
+<h3>Viewing the commit history</h3>
+<pre><code>$ git log
+commit b736ad1d23ea8449e7cadd8a0c738bfd8dd0049c
+Author: castroad &lt;castroad@yahoo-inc.com&gt;
+Date:   Mon Apr 2 15:05:21 2012 -0700
+
+    Renamed README and deleted hello.
+
+commit 4ff1af9ac2eae232d732b801a227c66c132a3543
+Author: castroad &lt;castroad@yahoo-inc.com&gt;
+Date:   Mon Apr 2 15:05:02 2012 -0700
+
+    Added a date to README and 'hello world' to hello.
+
+commit b80e06b60b7db9db9c8e29cd2afad813e84ed444
+Author: castroad &lt;castroad@yahoo-inc.com&gt;
+Date:   Mon Apr 2 15:02:25 2012 -0700
+
+    Added some notes to README.
+
+(…)
+</code></pre>
+<p>To view the actual changes (for patching, code reviews, etc):</p>
+<pre><code># Show only the last 2 commits
+$ git log -p -2
+(…)
+</code></pre>
+<p>Other options:</p>
+<pre><code>- `--stat`: abbreviated stats for each commit
+- `--oneline`: one liner simple output
+</code></pre>
+<h3>Inspecting specific commits</h3>
+<pre><code>$ git log --oneline
+b736ad1 Renamed README and deleted hello.
+4ff1af9 Added a date to README and 'hello world' to hello.
+b80e06b Added some notes to README.
+5de611b Added hello.
+ed7d7ff Added README.
+
+$ git show 4ff1af9
+(…)
+</code></pre>
+<h4>Viewing diffs between specific commits</h4>
+<pre><code>$ git log --oneline
+b736ad1 Renamed README and deleted hello.
+4ff1af9 Added a date to README and 'hello world' to hello.
+b80e06b Added some notes to README.
+5de611b Added hello.
+ed7d7ff Added README.
+
+$ git diff b80e06b..4ff1af9
+(…)
+</code></pre>
+<h3>Getting help</h3>
+<p>Interactively:</p>
+<pre><code>$ git help &lt;verb&gt;
+$ git &lt;verb&gt; --help
+$ man git-&lt;verb&gt;
+</code></pre>
+<p>IRC:</p>
+<ul>
+<li><a href="http://irc.corp.yahoo.com/join/zed-git">#zed-git</a> @ <a href="irc://irc.corp.yahoo.com/">irc.corp.yahoo.com</a></li>
+</ul>
+<p>Online:</p>
+<ul>
+<li><a href="http://gitref.org/">Git Reference</a></li>
+<li><a href="http://book.git-scm.com/">Git Community Book</a></li>
+<li><a href="http://gitready.com/">git ready</a></li>
+<li><a href="http://progit.org/">Pro Git</a></li>
+</ul>
+</body>
+</html>
