@@ -1,21 +1,59 @@
 # The Git sessions
+
+- **Session 1: The Basics**
+- Session 2: Undoing Things
+- Session 3: Branching and Merging
+- Session 4: Working with Remotes
+
+* * *
+
 ## Session 1: The Basics
+
+- What’s Git
+- Git vs SVN
+- Installation and setup
+- Creating your first Git repository
+- Adding and committing files
+- Viewing changes and previous commits
+
+* * *
+
+### Getting help
+
+IRC:
+
+- [\#zed-git](http://irc.corp.yahoo.com/join/zed-git) @ [irc.corp.yahoo.com](irc://irc.corp.yahoo.com/)
+
+Interactively:
+
+    $ git help <verb>
+    $ git <verb> --help
+    $ man git-<verb>
+
+Online:
+
+- [Git Reference](http://gitref.org/)
+- [Git Community Book](http://book.git-scm.com/)
+- [git ready](http://gitready.com/)
+- [Pro Git](http://progit.org/)
+
+* * *
 
 ### What's Git?
 - version control system
 - open source
-- <q>created by the same dudes that created Linux</q> [^github-intro]
-- <q>At the heart of GitHub</q> [^github-intro] <small>(this will make sense later)</small>
+- <q>created by the same dudes that created Linux</q>
+- <q>At the heart of GitHub</q> <small>(this will make sense later)</small>
 
-[^github-intro]: http://help.github.com/mac-set-up-git/
+* * *
 
 ### Git !== GitHub
 
-- <q>**Git** is an extremely fast, efficient, distributed version control system ideal for the collaborative development of software</q> [^git-vs-github]
-- <q>**GitHub** is the best way to collaborate with others. Fork, send pull requests and manage all your public and private Git repositories.</q> [^git-vs-github]
+- <q>**Git** is an extremely fast, efficient, distributed version control system ideal for the collaborative development of software</q>
+- <q>**GitHub** is the best way to collaborate with others. Fork, send pull requests and manage all your public and private Git repositories.</q>
     - think of it as SVN viewer, bugzilla and codereview.corp combined
 
-[^git-vs-github]: https://github.com/
+* * *
 
 ### How is it different from SVN?
 - **SVN** is a **centralised** version control system
@@ -26,11 +64,17 @@
 
 Read more about the [different types of version control systems](http://progit.org/book/ch1-1.html).
 
+* * *
+
 ### Centralized VCS
 ![Centralized version control diagram](http://progit.org/figures/ch1/18333fig0102-tn.png)
 
+* * *
+
 ### Distributed VCS
 ![Distributed version control diagram](http://progit.org/figures/ch1/18333fig0103-tn.png)
+
+* * *
 
 ### Distributed? Wait. What?!
 
@@ -43,6 +87,8 @@ Read more about the [different types of version control systems](http://progit.o
 - merging is much easier
 - allows for better collaboration across teams
 
+* * *
+
 ### How does all of this translate into every day coding?
 
 - commit early, commit often, commit without fear
@@ -53,7 +99,9 @@ Read more about the [different types of version control systems](http://progit.o
 - collaborate with others
     - no more sharing code on pastebin, email or ping
 
-### Installation and configuration (name, email)
+* * *
+
+### Installation and (simple) configuration
 #### Getting Git
 
 - at Y!: `$ yinst i git_core_y`
@@ -62,6 +110,8 @@ Read more about the [different types of version control systems](http://progit.o
 Try it:
 
     $ git
+
+* * *
 
 #### Configuration
 
@@ -72,6 +122,8 @@ Try it:
     $ git config --global color.ui true
 
 Note: in normal situations `user.name` would be your actual name but at Y! it has to be your Y!ID.
+
+* * *
 
 ### Creating your first Git repository
 
@@ -85,10 +137,14 @@ Note: in normal situations `user.name` would be your actual name but at Y! it ha
 
 Git will reply: `Initialized empty Git repository in .git/`
 
+* * *
+
 #### What’s in the .git directory
 
 - `.git/` is where Git stores the metadata and object database for the repository
 - We’ll come back to it later
+
+* * *
 
 ### Checking the status of the repository
 
@@ -105,6 +161,8 @@ Git will reply: `Initialized empty Git repository in .git/`
     #   README
     nothing added to commit but untracked files present (use "git add" to track)
 
+* * *
+
 #### The four states
 
 - **untracked**
@@ -118,6 +176,8 @@ Git will reply: `Initialized empty Git repository in .git/`
 
 ![The lifecycle of the status of your files](http://progit.org/figures/ch2/18333fig0201-tn.png)
 
+* * *
+
 #### The three sections
 
 - **git directory**
@@ -129,6 +189,8 @@ Git will reply: `Initialized empty Git repository in .git/`
 
 ![Working directory, staging area, and git directory](http://progit.org/figures/ch1/18333fig0106-tn.png)
 
+* * *
+
 ### Adding files
 
     $ git add README
@@ -138,6 +200,8 @@ Git will reply: `Initialized empty Git repository in .git/`
     #   (use "git rm --cached <file>..." to unstage)
     #
     #   new file:   README
+
+* * *
 
 ### Committing files
 
@@ -156,6 +220,8 @@ Where:
 - `454a516` is the SHA-1 checksum which uniquely identifies the commit
 - `0 files changed, 0 insertions(+), 0 deletions(-)` because the file was empty and git is looking at the file’s contents
 - `mode 100644 README` because the file was added with `644` permissions, i.e. world readable but only writeable by the owner (`rw-r--r--`)
+
+* * *
 
 ### Staging and committing files selectively
 
@@ -178,6 +244,8 @@ Where:
     $ git add hello
     $ git commit -m "Added hello."
 
+* * *
+
 ### Staging modified files
 
     $ git add README
@@ -188,6 +256,8 @@ Where:
     #
     #       modified:   README
     #
+
+* * *
 
 **Heads up:** If you make another change to the file:
 
@@ -215,6 +285,8 @@ Git stages a file exactly as it is when you run the `git add` command. If you co
     [master dc1ae3d] Added some notes to README.
      1 files changed, 2 insertions(+), 0 deletions(-)
 
+* * *
+
 ### Viewing your changes
 
     $ echo `date` >> README
@@ -240,6 +312,8 @@ Git stages a file exactly as it is when you run the `git add` command. If you co
     @@ -0,0 +1 @@
     +Hello World.
 
+* * *
+
 ### Viewing your changes in stage and HEAD
 
     $ git add README
@@ -252,6 +326,8 @@ Git stages a file exactly as it is when you run the `git add` command. If you co
     @@ -0,0 +1 @@
     +Hello World.
 
+* * *
+
 To see the changes in staged files:
 
     $ git diff --staged
@@ -263,6 +339,8 @@ To see the changes in staged files:
      This is my Git training repository.
      --castroad
     +Mon Apr 2 15:02:28 PDT 2012
+
+* * *
 
 To see all changes:
 
@@ -284,6 +362,8 @@ To see all changes:
 
 Where `HEAD` points to the latest commit (the tip of the branch you’re in).
 
+* * *
+
 ### Skipping the staging area
 
 Sometimes you don’t need the fine grain control the staging area offers and just want to commit all the files you’ve changed.
@@ -293,6 +373,8 @@ Sometimes you don’t need the fine grain control the staging area offers and ju
      M hello
 
     $ git commit -a -m "Added a date to README and 'hello world' to hello."
+
+* * *
 
 ### Moving and deleting files
 
@@ -311,6 +393,8 @@ Move and delete operations are performed on tracked files so they are automatica
     #
 
     $ git commit -m "Renamed README and deleted hello."
+
+* * *
 
 ### Viewing the commit history
 
@@ -335,6 +419,8 @@ Move and delete operations are performed on tracked files so they are automatica
 
     (…)
 
+* * *
+
 To view the actual changes (for patching, code reviews, etc):
 
     # Show only the last 2 commits
@@ -345,6 +431,8 @@ Other options:
 
     - `--stat`: abbreviated stats for each commit
     - `--oneline`: one liner simple output
+
+* * *
 
 ### Inspecting specific commits
 
@@ -358,6 +446,8 @@ Other options:
     $ git show 4ff1af9
     (…)
 
+* * *
+
 #### Viewing diffs between specific commits
 
     $ git log --oneline
@@ -370,22 +460,10 @@ Other options:
     $ git diff b80e06b..4ff1af9
     (…)
 
+* * *
 
-### Getting help
+## Summary
 
-Interactively:
-
-    $ git help <verb>
-    $ git <verb> --help
-    $ man git-<verb>
-
-IRC:
-
-- [#zed-git](http://irc.corp.yahoo.com/join/zed-git) @ [irc.corp.yahoo.com](irc://irc.corp.yahoo.com/)
-
-Online:
-
-- [Git Reference](http://gitref.org/)
-- [Git Community Book](http://book.git-scm.com/)
-- [git ready](http://gitready.com/)
-- [Pro Git](http://progit.org/)
+- Git is not SVN
+- It has a staging area
+- And uses SHA-1 checksums to identify single commits
