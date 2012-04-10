@@ -1,5 +1,42 @@
 # The Git sessions
+
+- Session 1: The Basics
+- **Session 2: Undoing Things**
+- Session 3: Branching and Merging
+- Session 4: Working with Remotes
+
+* * *
+
 ## Session 2: Undoing things
+
+- Unstaging files
+- Changing commits
+- Unmodifying files
+- Rewriting history
+- Stashing files
+
+* * *
+
+### Getting help
+
+IRC:
+
+- [\#zed-git](http://irc.corp.yahoo.com/join/zed-git) @ [irc.corp.yahoo.com](irc://irc.corp.yahoo.com/)
+
+Interactively:
+
+    $ git help <verb>
+    $ git <verb> --help
+    $ man git-<verb>
+
+Online:
+
+- [Git Reference](http://gitref.org/)
+- [Git Community Book](http://book.git-scm.com/)
+- [git ready](http://gitready.com/)
+- [Pro Git](http://progit.org/)
+
+* * *
 
 ### Unstaging files
 
@@ -42,7 +79,9 @@ You’re basically telling Git to reset `foobar` to the last known commit (`HEAD
 
     $ git commit -m "Added quux."
 
-### Changing the last commit
+* * *
+
+### Amending the last commit
 
     $ git log --oneline -2
     0a62ca2 Added quux.
@@ -55,7 +94,9 @@ You’re basically telling Git to reset `foobar` to the last known commit (`HEAD
     ee9c944 Added test file quux.
     e2a8b47 Added foobar.
 
-#### Using it to add missed files to a commit
+* * *
+
+#### Using amend to add missed files to a commit
 
 Forgot to add foobar. Let’s fix that:
 
@@ -84,6 +125,8 @@ Forgot to add foobar. Let’s fix that:
     new file mode 100644
     index 0000000..e69de29
 
+* * *
+
 ### Unmodifying a modified file
 
 Let’s make some changes to `foobar`:
@@ -110,8 +153,9 @@ You’re telling Git to check out the latest committed version of `foobar`. The 
     # On branch master
     nothing to commit (working directory clean)
 
-### Rewriting history
+* * *
 
+### Rewriting history
 #### Resetting your committed changes
 
 Let’s say you want to get rid of the last commit:
@@ -129,6 +173,8 @@ That last commit is gone.
     $ git log --oneline -2
     e2a8b47 Added foobar.
     12b41be Renamed README to README.txt and deleted hello.
+
+* * *
 
 But the files and changes are still there:
 
@@ -151,11 +197,14 @@ But the files and changes are still there:
 
 **NOTE:** This is because by default `git reset` will revert the commits but leave the changes in place. This is useful in case you want to make some further changes and re-commit. If you wish to completely obliterate the commit and its changes you can do `git reset --hard`.
 
+* * *
+
 For now let’s manually clean up our working directory and stage.
 
     $ git checkout -- foobar
     $ rm quux
 
+* * *
 
 #### Resetting your committed changes with a rebase
 
@@ -199,7 +248,9 @@ To do an interactive rebase we need to have at least to commits to rebase so we 
     5de611b Added hello.
     ed7d7ff Added README.
 
-#### Merging commits
+* * *
+
+#### Combining commits
 
     $ git log --oneline
     12b41be Renamed README to README.txt and deleted hello.
@@ -232,6 +283,8 @@ We want to merge the last three commits into a single one:
      17 #
 
      # save and exit vim
+
+* * *
 
 Git automatically prompts you to update the commit messages and explains what’s happening:
 
@@ -269,4 +322,40 @@ Git automatically prompts you to update the commit messages and explains what’
     5de611b Added hello.
     ed7d7ff Added README.
 
+* * *
+
 ### Stashing files
+
+    $ echo "It's a wrap." >> README
+
+    $ git status -s
+     M README.txt
+
+If you don’t want to commit these changes but also don’t want to lose them you can `stash` them away and use them later.
+
+    $ git stash save "It's a wrap on README"
+
+    $ git status
+    (…)
+    nothing to commit
+
+    $ git stash list
+    stash@{0}: On master: It's a wrap on README
+
+    $ git stash apply stash@{0}
+    # On branch master
+    # Changed but not updated:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #   modified:   README.txt
+    #
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+* * *
+
+## Summary
+
+- Git is your friend and often tells you how to do things
+- You can rewrite history
+- And stash your changes away
