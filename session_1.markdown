@@ -101,8 +101,7 @@ Read more about the [different types of version control systems](http://progit.o
 
 * * *
 
-### Installation and (simple) configuration
-#### Getting Git
+### Getting Git
 
 - at Y!: `$ yinst i git_core_y`
 - everywhere else: [see instructions in Pro Git](http://progit.org/book/ch1-4.html)
@@ -113,7 +112,7 @@ Try it:
 
 * * *
 
-#### Configuration
+### Configuration (simple)
 
     $ git config --global user.name $USER
     $ git config --global user.email $USER@yahoo-inc.com
@@ -459,6 +458,35 @@ Other options:
 
     $ git diff b80e06b..4ff1af9
     (…)
+
+* * *
+
+### Ignoring files
+
+    $ touch test.diff test.wip test.bak
+    $ mkdir artifacts
+    $ touch artifacts/report.txt
+
+    $ git status -s
+    ?? artifacts/
+    ?? test.bak
+    ?? test.diff
+    ?? test.wip
+
+    $ vi .gitignore
+    1 # Temp files
+    2 *.bak
+    3 *.wip
+    4 *.diff
+    5
+    6 # Unnecessary folders
+    7 artifacts/
+
+    $ git status -s
+    ?? .gitignore
+
+    $ git add .gitignore
+    $ git commit -m "Added a .gitignore file."
 
 * * *
 
