@@ -1,0 +1,127 @@
+/* @override http://127.0.0.1:8080/public/common/css/controls.css */
+
+#squeenote_controls {
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 10000;
+  width: 100%;
+  font-size: 16px;
+  background: #111;
+  -webkit-box-shadow: 0px 0px 5px #000;
+  -moz-box-shadow: 0px 0px 5px #000;
+  border-bottom: 1px solid #000;
+  opacity: 0.75;
+}
+
+#squeenote_controls a {
+  color: #FFF;
+  cursor: pointer;
+}
+
+#squeenote_controls .slide_counter {
+  	float: right;
+  	height: 1.1em;
+  	padding: 10px;
+  	margin: 5px;
+  	color: #666;
+  	background: #333;
+  	-webkit-border-radius: 5px;
+  	-moz-border-radius: 5px;
+}
+
+#squeenote_controls .client_controls, 
+#squeenote_controls .presenter_controls {
+  	float: left;
+  	position: absolute;
+	height: 1.1em;
+  	padding: 10px;
+  	margin: 5px;
+  	color: #666;
+  	background: #333;
+  	-webkit-border-radius: 5px;
+  	-moz-border-radius: 5px;
+	opacity: 1;
+  	left: 0;
+}
+#squeenote_controls .presenter_controls {
+	opacity: 0;
+	left: -100px;
+}
+#squeenote_controls .presenter_controls .presenter_controls_enabled {
+	display: none;
+}
+#squeenote_controls .presenter_controls .presenter_controls_disabled {
+	display: block;
+}
+#squeenote_controls .presenter_controls.enabled {
+	background: green;
+}
+#squeenote_controls .presenter_controls.enabled .presenter_controls_enabled {
+	display: block;
+}
+#squeenote_controls .presenter_controls.enabled .presenter_controls_disabled {
+	display: none;
+}
+
+
+#squeenote_controls label {
+	color: white;
+}
+#squeenote_controls .presenter_controls input {
+	margin: 0;
+	padding: 3px;
+	position: relative;
+	top: -2px;
+	border: 1px solid #333;
+}
+
+#squeenote_controls .presenter_controls_enabled {
+  color: white;
+  background: green;
+}
+  #squeenote_controls .presenter_controls_enabled a {
+    color: lime;
+    text-decoration: underline;
+  }
+
+/* Device-specific control styles: iPad */
+body.iPad #squeenote_controls {
+}
+
+/* Device-specific control styles: iPhone */
+body.iPhone #squeenote_controls {
+  position: static;
+  width: 480px;
+  font-size: 1em;
+}
+
+
+body.iPhone #squeenote_controls .client_controls, body.iPhone #squeenote_controls.presenter_controls {
+	margin-top: 8px;
+	height: auto;
+	float: none;
+	display: block;
+}
+
+body.iPhone #squeenote_controls .slide_counter {
+	margin: 4px 3px 0 0;
+	background: none;
+	color: #333;
+	padding: 0;
+}
+
+body.iPhone #squeenote_controls a.prev_slide {
+	background: black;
+	font-size: 1.5em;
+	padding: 0px -2px 3px 3px;
+	-webkit-border-radius: 3px;
+}
+
+
+body.iPhone #squeenote_controls a.next_slide {
+	background: black;
+	font-size: 1.5em;
+	padding: 0px -2px 3px 3px;
+	-webkit-border-radius: 3px;
+	
+}

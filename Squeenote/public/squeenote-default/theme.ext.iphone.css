@@ -1,0 +1,45 @@
+body {
+	padding: 0;
+	margin: 0;
+	background: #FFF;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+h2, h3, h4, h5, h6 {
+	font-size: 1.75em;
+}
+
+body > ol {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  position: static;
+}
+
+body > ol > li {
+  position: static;
+  overflow: none;
+  width: 480px;
+  margin: 0;
+  padding: 70px 0 0 0;
+  padding-bottom: 20px;
+  border: none;
+  -webkit-border-radius: 0;
+  /* Webkit-specific transformations */
+  -webkit-transition-property: none;
+}
+body > ol > li.pending {
+	display: none;
+	-webkit-box-shadow: none;
+}
+body > ol > li.current {
+	display: block;
+	-webkit-box-shadow: none;
+}
+body > ol > li.done {
+  	display: none;
+	-webkit-box-shadow: none;
+}

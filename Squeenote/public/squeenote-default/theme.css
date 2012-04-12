@@ -1,0 +1,144 @@
+/* @override http://127.0.0.1:8080/public/squeenote-default/theme.css */
+
+/* @group Primitive object styles */
+
+body {
+  font-family: Helvetica;
+  font-size: 1.5em;
+  background: #EFEFEF url('/public/squeenote-default/background.png');
+  color: #333;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+a {
+  color: #DB540F;
+}
+
+/* @end */
+
+/* @group Slide styles */
+
+body > ol {
+  position: relative;
+  max-width: 1860px;
+  padding: 0;
+  margin: 8% 10%;
+  list-style-type: none;
+}
+body > ol > li {
+  position: absolute;
+  width: 100%;
+  height: 600px;
+  margin: 0;
+  padding: 0;
+  background: #FFF;
+  border: 4px solid #EFEFEF;
+  overflow: auto;
+  
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  
+  /* Webkit-specific transformations */
+  -webkit-transition-property: border, left, right, opacity;
+  -webkit-transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+
+  /* Mozilla-specific transformations */
+  -moz-transition-property: border, left, right, opacity;
+  -moz-transition-duration: 0.3s;
+  -moz-transition-timing-function: ease-out;
+}
+body > ol > li.pending {
+	top: 0; right: -109%;
+}
+body > ol > li.current {
+	border-color: #333;
+	/*-webkit-box-shadow: 0px 0px 35px #5F5F45;
+	-moz-box-shadow: 0px 0px 35px #5F5F45;*/
+}
+body > ol > li.done {
+  	top: -0; left: -109%;
+}
+
+/* @end */
+
+/* @group Slide content styles */
+
+body > ol > li > * {
+	text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  	color: #FF8E00;
+  	font-size: 4em;
+  	margin: 30px 0px 0px 0px;
+  	padding: 20px 20px 25px 20px;
+  	text-shadow: 2px 2px #FFB75E;
+}
+
+h2, h3, h4, h5, h6 {
+	margin:  0;
+	color: #333;
+	text-shadow: 2px 2px #CCC;
+	font-size: 2.5em;	
+}
+
+h3, h4, h5, h6 {
+	font-size:  2em;
+}
+
+p {
+  	margin: 0px;
+  	padding: 20px 20px 0 20px;
+}
+
+img {
+	display: block;
+	margin: auto;
+}
+
+ol ul {
+	list-style-type: none;
+	margin:  0 auto; 
+	padding: 0 15px;
+}
+	ol ul li {
+
+		margin-bottom: 15px;
+		padding: 15px;
+		background:  #EFEFEF;
+		border:  1px solid #DDD;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+	}
+	ol ul li:last-child {
+		margin-bottom: 0;
+	}
+
+ol li pre {
+	display: inline;
+	margin: 0;
+}
+
+ol li code {
+  	display: block;
+  	height: 300px;
+  	font-size: 1em;
+  	text-align: left;
+  	margin: 20px;
+  	padding: 10px;
+  	background: #333;
+  	border: 3px solid #333;
+  	-webkit-border-radius: 3px;
+  	-moz-border-radius: 3px;
+  	color: white;
+  	overflow-y: scroll;
+}
+
+ol li code.bash {
+	height: 40px;
+}
+
+/* @end */
