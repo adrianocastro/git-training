@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Git Training - The Basics</title>
+
+        <!-- Apple mobile device handling -->
+        <meta name="viewport" content="user-scalable=no, width=device-width">
+
+        <!-- Common dependencies -->
+        <script type="text/javascript" src="/public/common/js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/public/common/js/jquery-ui-1.8.2.custom.min.js"></script>
+        <!-- socket.io -->
+        <script type="text/javascript">
+            WEB_SOCKET_SWF_LOCATION = "/public/common/js/socket.io/lib/vendor/web-socket-js/WebSocketMain.swf";
+        </script>
+        <script type="text/javascript" src="/public/common/js/socket.io.js"></script>
+        <!-- Squeenote core -->
+        <script type="text/javascript" src="/public/common/js/squeenote.device.js"></script>
+        <script type="text/javascript" src="/public/common/js/squeenote.presentation.js"></script>
+        <script type="text/javascript" src="/public/common/js/squeenote.ui.js"></script>
+        <link rel="stylesheet" href="/public/common/css/controls.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <!-- Boot Squeenote -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                squeenote.Device = new squeenote.Device();
+                squeenote.Presentation = new squeenote.Presentation();
+            })
+            $(document).bind("presentationLoaded.squeenote", function(event, presentation) {
+                squeenote.UI = new squeenote.UI(presentation);
+            });
+            $(document).bind('slideStateChanged.squeenote', function(e, li, state) {
+                if (state == 'current') {
+                    var currentHash = window.location.hash.replace('#', '');
+                    document.body.className = '';
+                    $('body').addClass(currentHash);
+
+                }
+            });
+        </script>
+
+        <!-- Theme files -->
+        <script type="text/javascript" src="/public/squeenote-default/theme.js"></script>
+        <link rel="stylesheet" href="/public/squeenote-default/my_theme.css" type="text/css">
+        <!-- <link rel="stylesheet" href="/public/squeenote-default/theme.css" type="text/css" media="screen" title="no title" charset="utf-8"> -->
+        <link media="only screen and (min-device-width: 768px) and (max-device-width: 1024px)"
+              href="/public/squeenote-default/theme.ext.ipad.css" type="text/css" rel="stylesheet">
+        <link media="only screen and (max-device-width: 480px)"
+              href="/public/squeenote-default/theme.ext.iphone.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <ol>
+<li>
+<h1>The Git sessions</h1>
+<ul>
+<li>Session 1: The Basics</li>
+<li>Session 2: Undoing Things</li>
+<li><strong>Session 3: Using git with svn.corp</strong></li>
+<li>Session 4: Branching and Merging</li>
+<li>Session 5: Working with Remotes</li>
+</ul>
+</li><li>
+<h2>Session 3: Using git with svn.corp</h2>
+<ul>
+<li>Cloning from an svn repository</li>
+<li>Diffing local with code in Subversion<ul>
+<li>Creating code reviews in Review Board</li>
+</ul>
+</li>
+<li>Pulling changes from Subversion</li>
+<li>Pushing changes to Subversion</li>
+</ul>
+</li><li>
+<h3>Getting help</h3>
+<p>IRC:</p>
+<ul>
+<li><a href="http://irc.corp.yahoo.com/join/zed-git">#zed-git</a> @ <a href="irc://irc.corp.yahoo.com/">irc.corp.yahoo.com</a></li>
+</ul>
+<p>Interactively:</p>
+<pre><code>$ git help &lt;verb&gt;
+$ git &lt;verb&gt; --help
+$ man git-&lt;verb&gt;
+</code></pre>
+<p>Online:</p>
+<ul>
+<li><a href="http://gitref.org/">Git Reference</a></li>
+<li><a href="http://book.git-scm.com/">Git Community Book</a></li>
+<li><a href="http://gitready.com/">git ready</a></li>
+<li><a href="http://progit.org/">Pro Git</a></li>
+</ul>
+</li><li>
+<h3>svn.corp as a remote repository</h3>
+<p>Up until now we’ve been working on local Git repositories. As a team we need to be able to share our code and push it to a central location.</p>
+<p>In the future this location will be a corp managed Git repository but, for now, we use good old svn.corp.</p>
+</li><li>
+<h3>Introducing git svn</h3>
+<p><code>git svn</code> provides two-way communication between a Git and Subversion repository. This allows us to work locally with Git, taking full advantage of its added benefits (e.g. locally managed commits, easy branching and merging, sharing with other developers) whilst still being able to pull and push code to and from Subversion.</p>
+</li><li>
+<h3>Getting git svn</h3>
+<p>At Y!:</p>
+<pre><code>$ yinst install yapr-1.2.12_1 yapr_util-1.2.12_1 \
+git_svn_y-test ysubversion-1.5.6_2 ysubversion_perl-1.5.6_6 \
+git_core_y-test -downgrade
+</code></pre>
+<p>Everywhere else: <code>git svn</code> should come bundled with Git.</p>
+<p>Try it:</p>
+<pre><code>$ git svn
+</code></pre>
+</li><li>
+<h3>Cloning a Subversion Repository</h3>
+<p>Similarly to what we do with Subversion we start by checking out (or cloning in Git lingo) our remote Subversion repository:</p>
+<pre><code>$ git svn clone svn+ssh://svn.corp.yahoo.com/yahoo/users/castroad/scratch ~/git-svn-training
+Initialized empty Git repository in /tmp/git-svn-training/.git/
+This may take a while on large repositories
+Checked Ahrough README
+r40377 = c2f37238a4701cf2a94cc8aa8f12bddcb2e3c11c (refs/remotes/git-svn)
+Checked out HEAD:
+  svn+ssh://svn.corp.yahoo.com/yahoo/users/castroad/scratch r40377
+</code></pre>
+<p>As you can see, this creates a new Git repository in the directory named <code>git-svn-training</code>, populates the Git history with all Subversion commits to the trunk, and checks out the latest HEAD.</p>
+</li><li>
+<h3>Diffing with svn</h3>
+<p>Let’s add our name to <code>users</code>.</p>
+<pre><code>$ echo $USER &gt;&gt; users
+$ git commit -am "Added $USER to the users file."
+</code></pre>
+<p>We can what’s changed from Subversion with <code>git diff</code> to the last known code we pulled from SVN:</p>
+<pre><code>$ git log
+062a8b8 Added castroad to the users file.
+6a00e22 Added users file.
+5ebc4b3 Added user file.
+c2f3723 Created scratch and added README.
+
+$ git diff 6a00e22
+diff --git a/users b/users
+index e69de29..9396e01 100644
+--- a/users
++++ b/users
+@@ -0,0 +1 @@
++castroad
+</code></pre>
+</li><li>
+<p>Or we can use <code>git svn-diff</code> which automagically knows what that commit is:</p>
+<pre><code>$ yinst i git_svn_diff-current
+
+$ git svn-diff
+Index: users
+===================================================================
+--- users       (revision 40381)
++++ users       (working copy)
+@@ -0,0 +1 @@
++castroad
+</code></pre>
+</li><li>
+<h4>Creating code reviews in Review Board</h4>
+<p>Let’s start by installing <code>crpost</code>:</p>
+<pre><code>$ yinst i crpost
+</code></pre>
+<p>In addition to knowing what was the last commit you pulled from Subversion <code>git svn-diff</code> also happens to create diffs in <code>crpost</code> friendly <code>svn diff</code> format.</p>
+<p>Friendly <code>git svn-diff</code> comes to the rescue, again:</p>
+<pre><code>$ git svn-diff | crpost --bug-id 5521451 --reviewer castroad
+Backyard password (castroad): butterflies
+Created review 98767 [ http://codereview.corp.yahoo.com/r/98767 ]
+</code></pre>
+</li><li>
+<h3>Pulling changes from Subversion</h3>
+<pre><code>$ git svn rebase
+    M   LATEST
+r3 = ae409c2f5fe0831f22d6dc891652b5f9159f35de (git-svn)
+First, rewinding head to replay your work on top of it...
+Applying: Local git commit.
+</code></pre>
+<p>The output shows us a list of modified files, then informs us revision 3 from Subversion is being stored in commit <code>ae409c2</code>.</p>
+<p>The rewinding portion is <code>git svn</code> taking the svn HEAD and then applying your work on top of it.</p>
+</li><li>
+<h3>Pushing change to Subversion</h3>
+<p>You’ve finished your feature/bug, tested it thoroughly, had it code-reviewed and all is well. It’s time to push them to Subversion:</p>
+<pre><code># First lets update from Subversion
+$ git svn rebase
+Current branch master is up to date.
+
+# Now lets push our code
+$ git svn dcommit
+Committing to svn+ssh://svn.corp.yahoo.com/yahoo/users/castroad/scratch ...
+        M       users
+Committed r40382
+        M       users
+r40382 = de1a3bec31903f1bd0bd61b1842a1d329e06080e (refs/remotes/git-svn)
+No changes between current HEAD and refs/remotes/git-svn
+Resetting to the latest refs/remotes/git-svn
+</code></pre>
+<p>Your local Git and remote Subversion repositories are now in sync.</p>
+</li><li>
+<h3>Handling merge conflicts</h3>
+<p>So, you’ve pulled from Subversion and you ended up with some conflicts:</p>
+<pre><code>$ git svn rebase
+    M   README
+r40384 = 08fe6fa7036b3400ce546e92adef55f82cf1a27b (refs/remotes/git-svn)
+First, rewinding head to replay your work on top of it...
+(…)
+CONFLICT (content): Merge conflict in REAMDE
+Failed to merge in the changes.
+Patch failed at 0001 Hoping to break README
+
+When you have resolved this problem run "git rebase --continue".
+If you would prefer to skip this patch, instead run "git rebase --skip".
+To restore the original branch and stop rebasing run "git rebase --abort".
+
+# manually fix the conflicts or use git mergetool
+
+$ git add
+$ git rebase --continue
+</code></pre>
+<p>That is all.</p>
+</li><li>
+<p>You can also skip or abort the merge:</p>
+<pre><code>$ git rebase --skip
+$ git rebase --abort
+</code></pre>
+</li><li>
+<h3>Pitfalls of git svn</h3>
+<p>As awesome as rewriting history may be (remember session 2?) please <strong>remember not to</strong> amend, reorder, or otherwise change commits that have been dcommited to Subversion. Subversion cannot handle modifying or reordering commits.</p>
+<p>This is essentially the same rule as not changing Git commits that have been pushed to public repositories.</p>
+</li><li>
+<h2>Summary</h2>
+<ul>
+<li>Even without a central shared remote Git repository we can still take advantage of Git</li>
+<li><code>git svn</code> makes it possible to keep Git and Subversion in sync</li>
+<li><code>git svn-diff</code> allows us to create code-reviews in Review Board</li>
+</ul>
+</li>
+        </ol>
+    </body>
+</html>
