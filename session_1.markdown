@@ -2,8 +2,9 @@
 
 - **Session 1: The Basics**
 - Session 2: Undoing Things
-- Session 3: Branching and Merging
-- Session 4: Working with Remotes
+- Session 3: Using git with svn.corp
+- Session 4: Branching and Merging
+- Session 5: Working with Remotes
 
 * * *
 
@@ -324,6 +325,8 @@ Git stages a file exactly as it is when you run the `git add` command. If you co
     +++ b/hello
     @@ -0,0 +1 @@
     +Hello World.
+
+After adding the file a regular `git diff` doesn’t report any changes to that file.
 
 * * *
 

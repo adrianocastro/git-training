@@ -2,8 +2,9 @@
 
 - Session 1: The Basics
 - **Session 2: Undoing Things**
-- Session 3: Branching and Merging
-- Session 4: Working with Remotes
+- Session 3: Using git with svn.corp
+- Session 4: Branching and Merging
+- Session 5: Working with Remotes
 
 * * *
 
