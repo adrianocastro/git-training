@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Git Training - The Basics</title>
+
+        <!-- Apple mobile device handling -->
+        <meta name="viewport" content="user-scalable=no, width=device-width">
+
+        <!-- Common dependencies -->
+        <script type="text/javascript" src="/public/common/js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/public/common/js/jquery-ui-1.8.2.custom.min.js"></script>
+        <!-- socket.io -->
+        <script type="text/javascript">
+            WEB_SOCKET_SWF_LOCATION = "/public/common/js/socket.io/lib/vendor/web-socket-js/WebSocketMain.swf";
+        </script>
+        <script type="text/javascript" src="/public/common/js/socket.io.js"></script>
+        <!-- Squeenote core -->
+        <script type="text/javascript" src="/public/common/js/squeenote.device.js"></script>
+        <script type="text/javascript" src="/public/common/js/squeenote.presentation.js"></script>
+        <script type="text/javascript" src="/public/common/js/squeenote.ui.js"></script>
+        <link rel="stylesheet" href="/public/common/css/controls.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <!-- Boot Squeenote -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                squeenote.Device = new squeenote.Device();
+                squeenote.Presentation = new squeenote.Presentation();
+            })
+            $(document).bind("presentationLoaded.squeenote", function(event, presentation) {
+                squeenote.UI = new squeenote.UI(presentation);
+            });
+            $(document).bind('slideStateChanged.squeenote', function(e, li, state) {
+                if (state == 'current') {
+                    var currentHash = window.location.hash.replace('#', '');
+                    document.body.className = '';
+                    $('body').addClass(currentHash);
+
+                }
+            });
+        </script>
+
+        <!-- Theme files -->
+        <script type="text/javascript" src="/public/squeenote-default/theme.js"></script>
+        <link rel="stylesheet" href="/public/squeenote-default/my_theme.css" type="text/css">
+        <!-- <link rel="stylesheet" href="/public/squeenote-default/theme.css" type="text/css" media="screen" title="no title" charset="utf-8"> -->
+        <link media="only screen and (min-device-width: 768px) and (max-device-width: 1024px)"
+              href="/public/squeenote-default/theme.ext.ipad.css" type="text/css" rel="stylesheet">
+        <link media="only screen and (max-device-width: 480px)"
+              href="/public/squeenote-default/theme.ext.iphone.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <ol>
+<li>
+<h1>The Git sessions</h1>
+<ul>
+<li>Session 1: The Basics</li>
+<li><strong>Session 2: Undoing Things</strong></li>
+<li>Session 3: Using git with svn.corp</li>
+<li>Session 4: Branching and Merging</li>
+<li>Session 5: Working with Remotes</li>
+</ul>
+</li><li>
+<h2>Session 2: Undoing things</h2>
+<ul>
+<li>Unstaging files</li>
+<li>Changing commits</li>
+<li>Unmodifying files</li>
+<li>Rewriting history</li>
+<li>Stashing files</li>
+</ul>
+</li><li>
+<h3>Getting help</h3>
+<p>IRC:</p>
+<ul>
+<li><a href="http://irc.corp.yahoo.com/join/zed-git">#zed-git</a> @ <a href="irc://irc.corp.yahoo.com/">irc.corp.yahoo.com</a></li>
+</ul>
+<p>Interactively:</p>
+<pre><code>$ git help &lt;verb&gt;
+$ git &lt;verb&gt; --help
+$ man git-&lt;verb&gt;
+</code></pre>
+<p>Online:</p>
+<ul>
+<li><a href="http://gitref.org/">Git Reference</a></li>
+<li><a href="http://book.git-scm.com/">Git Community Book</a></li>
+<li><a href="http://gitready.com/">git ready</a></li>
+<li><a href="http://progit.org/">Pro Git</a></li>
+</ul>
+</li><li>
+<h3>Unstaging files</h3>
+<pre><code>$ touch foobar
+$ git commit -am "Added foobar."
+
+$ echo 'hello foo' &gt; foobar
+$ touch quux
+
+$ git add .
+</code></pre>
+<p>You’ve now staged both files but you actually only wanted to stage and commit <code>quux</code>. Running <code>git status</code> tells you just that and is kind enough to tell you how to unstage files:</p>
+<pre><code>$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)
+#
+#       modified:   foobar
+#       new file:   quux
+#
+</code></pre>
+</li><li>
+<pre><code>$ git reset HEAD foobar</code></pre>
+<p>You’re basically telling Git to reset <code>foobar</code> to the last known commit (<code>HEAD</code> = the tip of the branch).</p>
+<pre><code>$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)
+#
+#       new file:   quux
+#
+# Changed but not updated:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#       modified:   foobar
+#
+
+$ git commit -m "Added quux."
+</code></pre>
+</li><li>
+<h3>Amending the last commit</h3>
+<p>Let’s have a look at where we are:</p>
+<pre><code>$ git log --oneline -2
+0a62ca2 Added quux.
+e2a8b47 Added foobar.
+</code></pre>
+
+<p>In that last commit I forgot to mention that <code>quux</code> is a test file. Let’s fix that.</p>
+
+<pre><code>$ git commit --amend
+# Change message to "Added test file quux."
+
+$ git log --oneline -2
+ee9c944 Added test file quux.
+e2a8b47 Added foobar.
+</code></pre>
+<p>Beautiful!</p>
+<p><strong>NOTE:</strong> you can only amend commits on your local repository. Once you’ve pushed to a remote repository you can’t do it anymore.</p>
+</li><li>
+<h4>Using amend to add missed files</h4>
+<p>Forgot to add foobar. Let’s fix that:</p>
+<pre><code>$ git add foobar && git commit --amend
+# Change message to "Added test file quux and made changes to foobar."
+$ git log --oneline -1
+648b0ad Added test file quux and made changes to foobar.
+$ git show 648b0ad
+commit 648b0adf7486f0b8730665257c443b5bba512168
+Author: Adriano Castro &lt;ad@adrianocastro.net&gt;
+Date:   Tue Apr 3 02:55:36 2012 -0700
+
+    Added test file quux and made changes to foobar.
+
+diff --git a/foobar b/foobar
+index e69de29..dfbb215 100644
+--- a/foobar
++++ b/foobar
+@@ -0,0 +1 @@
++hello foo
+diff --git a/quux b/quux
+new file mode 100644
+index 0000000..e69de29
+</code></pre>
+</li><li>
+<h3>Unmodifying a modified file</h3>
+<pre><code>$ echo 'goodbye.' &gt;&gt; foobar
+</code></pre>
+<p><strong>Oops!</strong> I regret doing that. Luckily Git tells me how I can easily discard these changes:</p>
+<pre><code>$ git status
+# On branch master
+# Changed but not updated:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#       modified:   foobar
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ git checkout -- foobar
+</code></pre>
+<p>The double dashes simply mean you’re done passing parameters to the command and what follows is a file.</p>
+<pre><code>$ git status
+# On branch master
+nothing to commit (working directory clean)
+</code></pre>
+</li><li>
+<h3>Rewriting history</h3>
+<h4>Resetting your committed changes</h4>
+<p>Let’s say you want to get rid of the last commit:</p>
+<pre><code>$ git log --oneline -2
+648b0ad Added test file quux and made changes to foobar.
+e2a8b47 Added foobar.
+</code></pre>
+<p>You can tell Git to reset from where you are minus one commit:</p>
+<pre><code>$ git reset HEAD~1
+</code></pre>
+<p>That last commit is gone.</p>
+<pre><code>$ git log --oneline -2
+e2a8b47 Added foobar.
+12b41be Renamed README to README.txt and deleted hello.
+</code></pre>
+</li><li>
+<p>But the files and changes are still there:</p>
+<pre><code>$ git status
+# On branch master
+# Your branch and 'origin/master' have diverged,D
+# and have 1 and 2 different commit(s) each, respectively.
+#
+# Changed but not updated:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#   modified:   foobar
+#
+# Untracked files:
+#   (use "git add &lt;file&gt;..." to include in what will be committed)
+#
+#   quux
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre>
+<p><strong>NOTE:</strong> This is because by default <code>git reset</code> will revert the commits but leave the changes in place. This is useful in case you want to make some further changes and re-commit. If you wish to completely obliterate the commit and its changes you can do <code>git reset --hard</code>.</p>
+</li><li>
+<p>For now let’s manually clean up our working directory and stage.</p>
+<pre><code>$ git checkout -- foobar
+$ rm quux
+</code></pre>
+</li><li>
+<h4>Reset committed changes with a rebase</h4>
+<p>Another way you can undo committed changes is by rebasing your repository:</p>
+<pre><code>$ git log --oneline
+e2a8b47 Added foobar.
+12b41be Renamed README to README.txt and deleted hello.
+4ff1af9 Added a date to README and 'hello world' to hello.
+b80e06b Added some notes to README.
+5de611b Added hello.
+ed7d7ff Added README.
+</code></pre>
+<p>We want to remove the commit where we added <code>foobar</code>. It’s the first commit in our commit history.</p>
+</li><li>
+<p>To do an interactive rebase we need to have at least to commits to rebase so we call <code>git rebase</code> on <code>HEAD</code> minus two commits.</p>
+<pre><code>$ git rebase -i HEAD~2
+# vim
+  1 pick 12b41be Renamed README to README.txt and deleted hello.
+-&gt;2 # pick e2a8b47 Added foobar.
+  3
+  4 # Rebase 4ff1af9..e2a8b47 onto 4ff1af9
+  5 #
+  6 # Commands:
+  7 #  p, pick = use commit
+  8 #  r, reword = use commit, but edit the commit message
+  9 #  e, edit = use commit, but stop for amending
+ 10 #  s, squash = use commit, but meld into previous commit
+ 11 #  f, fixup = like "squash", but discard this commit's log message
+ 12 #  x &lt;cmd&gt;, exec &lt;cmd&gt; = Run a shell command &lt;cmd&gt;, and stop if it fails
+ 13 #
+ 14 # If you remove a line here THAT COMMIT WILL BE LOST.
+ 15 # However, if you remove everything, the rebase will be aborted.
+</code></pre>
+<p>The interactive rebase tells us that <em>“If you remove a line here <strong>THAT COMMIT WILL BE LOST</strong>”</em>. Commenting out line 2 does just that.</p>
+</li><li>
+<p>A quick peek a the logs shows us the previous “Added foobar” commit is now gone:</p>
+<pre><code>$ git log --oneline
+12b41be Renamed README to README.txt and deleted hello.
+4ff1af9 Added a date to README and 'hello world' to hello.
+b80e06b Added some notes to README.
+5de611b Added hello.
+ed7d7ff Added README.
+</code></pre>
+</li><li>
+<h4>Combining commits</h4>
+<pre><code>$ git log --oneline
+12b41be Renamed README to README.txt and deleted hello.
+4ff1af9 Added a date to README and 'hello world' to hello.
+b80e06b Added some notes to README.
+5de611b Added hello.
+ed7d7ff Added README.
+</code></pre>
+<p>We want to merge the last three commits into a single one.</p>
+</li><li>
+<p>As before, we call an interactive <code>git rebase</code> and tell it go look at <code>HEAD</code> minus those three commits we want to merge:</p>
+<pre><code>$ git rebase -i HEAD~3
+
+# vim
+  1 pick b80e06b Added some notes to README.
+-&gt;2 fixup 4ff1af9 Added a date to README and 'hello world' to hello.
+-&gt;3 squash 12b41be Renamed README to README.txt and deleted hello.
+  4
+  5 # Rebase 5de611b..12b41be onto 5de611b
+  6 #
+  7 # Commands:
+  8 #  p, pick = use commit
+  9 #  r, reword = use commit, but edit the commit message
+ 10 #  e, edit = use commit, but stop for amending
+ 11 #  s, squash = use commit, but meld into previous commit
+ 12 #  f, fixup = like "squash", but discard this commit's log message
+ 13 #  x &lt;cmd&gt;, exec &lt;cmd&gt; = Run a shell command &lt;cmd&gt;, and stop if it fails
+ 14 #
+ 15 # If you remove a line here THAT COMMIT WILL BE LOST.
+ 16 # However, if you remove everything, the rebase will be aborted.
+ 17 #
+
+ # save and exit vim
+</code></pre>
+</li><li>
+<p>Git automatically prompts you to update the commit messages and explains what’s happening:</p>
+<pre><code>   1 # This is a combination of 3 commits.
+   2 # The first commit's message is:
+   3 Added some notes to README.
+   4
+   5 # The 2nd commit message will be skipped:
+   6
+ -&gt;7 #   Added a date to README and 'hello world' to hello.
+   8
+   9 # This is the 3rd commit message:
+  10
+-&gt;11 Renamed README to README.txt.
+  12
+  13 # Please enter the commit message for your changes. Lines starting
+  14 # with '#' will be ignored, and an empty message aborts the commit.
+  15 #
+  16 # Author:    castroad &lt;castroad@yahoo-inc.com&gt;
+  17 #
+  18 # Not currently on any branch.
+  19 # Changes to be committed:
+  20 #   (use "git reset HEAD &lt;file&gt;..." to unstage)
+  21 #
+  22 #   deleted:    README
+  23 #   new file:   README.txt
+  24 #   deleted:    hello
+# save and exit vim
+</code></pre>
+</li><li>
+<p>The logs don’t lie:</p>
+<pre><code>$ git log --oneline
+9341986 Added some notes to README.
+5de611b Added hello.
+ed7d7ff Added README.
+</code></pre>
+<p>In addition to the staging of files, having the ability to reword, combine and delete commits makes it possible to really tailor your work into well packaged deliverable bit of code and avoids atomic revisions that may never have existed as a working copy and may not work.</p>
+</li><li>
+<h3>Stashing files</h3>
+<pre><code>$ echo "It's a wrap." &gt;&gt; README
+
+$ git status -s
+ M README.txt
+</code></pre>
+<p>If you don’t want to commit these changes but also don’t want to lose them you can <code>stash</code> them away and use them later.</p>
+</li><li>
+<p>This is useful for when you’re halfway through a bug fix but need to update your code or for those pressing P1 bugs in production that need your attention <strong>right now</strong>. It’s the perfect way to place your work-in-progress temporarily away without losing it.</p>
+<pre><code>$ git stash save "It's a wrap on README"
+$ git status
+(…)
+nothing to commit
+$ git stash list
+stash@{0}: On master: It's a wrap on README
+</code></pre>
+
+<p>Bringing the stash back is simple:</p>
+
+<pre><code>$ git stash apply stash@{0}
+# On branch master
+# Changed but not updated:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#   modified:   README.txt
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre>
+<p><strong>NOTE:</strong> for more serious changes you should really be using branches instead.</p>
+</li><li>
+<h2>Summary</h2>
+<ul>
+<li>Git is your friend and often tells you how to do things</li>
+<li>You can rewrite history</li>
+<li>And stash your changes away</li>
+</ul>
+</li>
+        </ol>
+    </body>
+</html>
