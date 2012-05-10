@@ -89,7 +89,8 @@ $ man git-&lt;verb&gt;
 </li><li>
 <h3>Unstaging files</h3>
 <pre><code>$ touch foobar
-$ git commit -am "Added foobar."
+$ git add foobar
+$ git commit -m "Added foobar."
 
 $ echo 'hello foo' &gt; foobar
 $ touch quux
@@ -107,6 +108,7 @@ $ git add .
 #
 </code></pre>
 </li><li>
+<p>Let’s reset <code>foobar</code>.</p>
 <pre><code>$ git reset HEAD foobar</code></pre>
 <p>You’re basically telling Git to reset <code>foobar</code> to the last known commit (<code>HEAD</code> = the tip of the branch).</p>
 <pre><code>$ git status
@@ -204,7 +206,7 @@ e2a8b47 Added foobar.
 <p>That last commit is gone.</p>
 <pre><code>$ git log --oneline -2
 e2a8b47 Added foobar.
-12b41be Renamed README to README.txt and deleted hello.
+4eeba3b Added a .gitignore file.
 </code></pre>
 </li><li>
 <p>But the files and changes are still there:</p>
@@ -236,6 +238,7 @@ $ rm quux
 <p>Another way you can undo committed changes is by rebasing your repository:</p>
 <pre><code>$ git log --oneline
 e2a8b47 Added foobar.
+4eeba3b Added a .gitignore file.
 12b41be Renamed README to README.txt and deleted hello.
 4ff1af9 Added a date to README and 'hello world' to hello.
 b80e06b Added some notes to README.
@@ -247,7 +250,7 @@ ed7d7ff Added README.
 <p>To do an interactive rebase we need to have at least to commits to rebase so we call <code>git rebase</code> on <code>HEAD</code> minus two commits.</p>
 <pre><code>$ git rebase -i HEAD~2
 # vim
-  1 pick 12b41be Renamed README to README.txt and deleted hello.
+  1 pick 4eeba3b Added a .gitignore file.
 -&gt;2 # pick e2a8b47 Added foobar.
   3
   4 # Rebase 4ff1af9..e2a8b47 onto 4ff1af9
@@ -267,6 +270,7 @@ ed7d7ff Added README.
 </li><li>
 <p>A quick peek a the logs shows us the previous “Added foobar” commit is now gone:</p>
 <pre><code>$ git log --oneline
+4eeba3b Added a .gitignore file.
 12b41be Renamed README to README.txt and deleted hello.
 4ff1af9 Added a date to README and 'hello world' to hello.
 b80e06b Added some notes to README.
@@ -276,35 +280,37 @@ ed7d7ff Added README.
 </li><li>
 <h4>Combining commits</h4>
 <pre><code>$ git log --oneline
+4eeba3b Added a .gitignore file.
 12b41be Renamed README to README.txt and deleted hello.
 4ff1af9 Added a date to README and 'hello world' to hello.
 b80e06b Added some notes to README.
 5de611b Added hello.
 ed7d7ff Added README.
 </code></pre>
-<p>We want to merge the last three commits into a single one.</p>
+<p>We want to merge the three commits before <code>4eeba3b</code> (“Added a .gitignore file”) into a single one.</p>
 </li><li>
 <p>As before, we call an interactive <code>git rebase</code> and tell it go look at <code>HEAD</code> minus those three commits we want to merge:</p>
-<pre><code>$ git rebase -i HEAD~3
+<pre><code>$ git rebase -i HEAD~4
 
 # vim
   1 pick b80e06b Added some notes to README.
 -&gt;2 fixup 4ff1af9 Added a date to README and 'hello world' to hello.
 -&gt;3 squash 12b41be Renamed README to README.txt and deleted hello.
-  4
-  5 # Rebase 5de611b..12b41be onto 5de611b
-  6 #
-  7 # Commands:
-  8 #  p, pick = use commit
-  9 #  r, reword = use commit, but edit the commit message
- 10 #  e, edit = use commit, but stop for amending
- 11 #  s, squash = use commit, but meld into previous commit
- 12 #  f, fixup = like "squash", but discard this commit's log message
- 13 #  x &lt;cmd&gt;, exec &lt;cmd&gt; = Run a shell command &lt;cmd&gt;, and stop if it fails
- 14 #
- 15 # If you remove a line here THAT COMMIT WILL BE LOST.
- 16 # However, if you remove everything, the rebase will be aborted.
- 17 #
+  4 pick 4eeba3b Added a .gitignore file
+  5
+  6 # Rebase 5de611b..12b41be onto 5de611b
+  7 #
+  8 # Commands:
+  9 #  p, pick = use commit
+ 10 #  r, reword = use commit, but edit the commit message
+ 11 #  e, edit = use commit, but stop for amending
+ 12 #  s, squash = use commit, but meld into previous commit
+ 13 #  f, fixup = like "squash", but discard this commit's log message
+ 14 #  x &lt;cmd&gt;, exec &lt;cmd&gt; = Run a shell command &lt;cmd&gt;, and stop if it fails
+ 15 #
+ 16 # If you remove a line here THAT COMMIT WILL BE LOST.
+ 17 # However, if you remove everything, the rebase will be aborted.
+ 18 #
 
  # save and exit vim
 </code></pre>
@@ -334,11 +340,13 @@ ed7d7ff Added README.
   22 #   deleted:    README
   23 #   new file:   README.txt
   24 #   deleted:    hello
+  …
 # save and exit vim
 </code></pre>
 </li><li>
 <p>The logs don’t lie:</p>
 <pre><code>$ git log --oneline
+1b16180 Added a .gitignore file.
 9341986 Added some notes to README.
 5de611b Added hello.
 ed7d7ff Added README.
@@ -346,7 +354,7 @@ ed7d7ff Added README.
 <p>In addition to the staging of files, having the ability to reword, combine and delete commits makes it possible to really tailor your work into well packaged deliverable bit of code and avoids atomic revisions that may never have existed as a working copy and may not work.</p>
 </li><li>
 <h3>Stashing files</h3>
-<pre><code>$ echo "It's a wrap." &gt;&gt; README
+<pre><code>$ echo "It's a wrap." &gt;&gt; README.txt
 
 $ git status -s
  M README.txt
@@ -374,6 +382,7 @@ stash@{0}: On master: It's a wrap on README
 #
 no changes added to commit (use "git add" and/or "git commit -a")
 </code></pre>
+<p>You can also use <code>git stash pop</code>. It’ll automaticaly apply the last stash and delete it from the stash.</p>
 <p><strong>NOTE:</strong> for more serious changes you should really be using branches instead.</p>
 </li><li>
 <h2>Summary</h2>

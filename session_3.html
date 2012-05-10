@@ -158,7 +158,7 @@ Index: users
 </code></pre>
 <p>In addition to knowing what was the last commit you pulled from Subversion <code>git svn-diff</code> also happens to create diffs in <code>crpost</code> friendly <code>svn diff</code> format.</p>
 <p>Friendly <code>git svn-diff</code> comes to the rescue, again:</p>
-<pre><code>$ git svn-diff | crpost --bug-id 5521451 --reviewer castroad
+<pre><code>$ git svn-diff | crpost --bug-id 5521451 --reviewer castroad --create
 Backyard password (castroad): butterflies
 Created review 98767 [ http://codereview.corp.yahoo.com/r/98767 ]
 </code></pre>
