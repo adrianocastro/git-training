@@ -132,7 +132,7 @@ In addition to knowing what was the last commit you pulled from Subversion `git 
 
 Friendly `git svn-diff` comes to the rescue, again:
 
-    $ git svn-diff | crpost --bug-id 5521451 --reviewer castroad
+    $ git svn-diff | crpost --bug-id 5521451 --reviewer castroad --create
     Backyard password (castroad): butterflies
     Created review 98767 [ http://codereview.corp.yahoo.com/r/98767 ]
 
