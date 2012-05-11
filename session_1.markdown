@@ -113,7 +113,7 @@ Try it:
 
 * * *
 
-### Configuration (simple)
+### Configuration
 
     $ git config --global user.name $USER
     $ git config --global user.email $USER@yahoo-inc.com
@@ -178,7 +178,7 @@ Git will reply: `Initialized empty Git repository in .git/`
 
 * * *
 
-#### The three sections
+#### The three sections in action
 
 - **git directory**
     - where **committed** files live
@@ -326,11 +326,9 @@ Git stages a file exactly as it is when you run the `git add` command. If you co
     @@ -0,0 +1 @@
     +Hello World.
 
-After adding the file a regular `git diff` doesn’t report any changes to that file.
-
 * * *
 
-To see the changes in staged files:
+After adding the file a regular `git diff` doesn’t report any changes to that file. Instead do:
 
     $ git diff --staged
     diff --git a/README b/README
@@ -344,7 +342,7 @@ To see the changes in staged files:
 
 * * *
 
-To see all changes:
+If you want to see all changes since the last commit (including both staged and unstaged files):
 
     $ git diff HEAD
     diff --git a/README b/README
