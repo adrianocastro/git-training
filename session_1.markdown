@@ -2,7 +2,7 @@
 
 - **Session 1: The Basics**
 - Session 2: Undoing Things
-- Session 3: Using git with svn.corp
+- Session 3: Using git with svn
 - Session 4: Branching and Merging
 - Session 5: Working with Remotes
 
@@ -20,10 +20,6 @@
 * * *
 
 ### Getting help
-
-IRC:
-
-- [\#zed-git](http://irc.corp.yahoo.com/join/zed-git) @ [irc.corp.yahoo.com](irc://irc.corp.yahoo.com/)
 
 Interactively:
 
@@ -52,7 +48,7 @@ Online:
 
 - <q>**Git** is an extremely fast, efficient, distributed version control system ideal for the collaborative development of software</q>
 - <q>**GitHub** is the best way to collaborate with others. Fork, send pull requests and manage all your public and private Git repositories.</q>
-    - think of it as SVN viewer, bugzilla and codereview.corp combined
+    - think of it as SVN viewer, bugzilla and reviewboard combined
 
 * * *
 
@@ -104,8 +100,7 @@ Read more about the [different types of version control systems](http://progit.o
 
 ### Getting Git
 
-- at Y!: `$ yinst i git_core_y`
-- everywhere else: [see instructions in Pro Git](http://progit.org/book/ch1-4.html)
+- see [instructions in Pro Git](http://progit.org/book/ch1-4.html)
 
 Try it:
 
@@ -116,12 +111,10 @@ Try it:
 ### Configuration
 
     $ git config --global user.name $USER
-    $ git config --global user.email $USER@yahoo-inc.com
+    $ git config --global user.email $USER@example.com
 
     # Make it look pretty
     $ git config --global color.ui true
-
-Note: in normal situations `user.name` would be your actual name but at Y! it has to be your Y!ID.
 
 * * *
 
@@ -400,19 +393,19 @@ Move and delete operations are performed on tracked files so they are automatica
 
     $ git log
     commit b736ad1d23ea8449e7cadd8a0c738bfd8dd0049c
-    Author: castroad <castroad@yahoo-inc.com>
+    Author: Adriano Castro <ad@adrianocastro.net>
     Date:   Mon Apr 2 15:05:21 2012 -0700
 
         Renamed README and deleted hello.
 
     commit 4ff1af9ac2eae232d732b801a227c66c132a3543
-    Author: castroad <castroad@yahoo-inc.com>
+    Author: Adriano Castro <ad@adrianocastro.net>
     Date:   Mon Apr 2 15:05:02 2012 -0700
 
         Added a date to README and 'hello world' to hello.
 
     commit b80e06b60b7db9db9c8e29cd2afad813e84ed444
-    Author: castroad <castroad@yahoo-inc.com>
+    Author: Adriano Castro <ad@adrianocastro.net>
     Date:   Mon Apr 2 15:02:25 2012 -0700
 
         Added some notes to README.

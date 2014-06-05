@@ -2,7 +2,7 @@
 
 - Session 1: The Basics
 - **Session 2: Undoing Things**
-- Session 3: Using git with svn.corp
+- Session 3: Using git with svn
 - Session 4: Branching and Merging
 - Session 5: Working with Remotes
 
@@ -19,10 +19,6 @@
 * * *
 
 ### Getting help
-
-IRC:
-
-- [\#zed-git](http://irc.corp.yahoo.com/join/zed-git) @ [irc.corp.yahoo.com](irc://irc.corp.yahoo.com/)
 
 Interactively:
 
@@ -322,7 +318,7 @@ Git automatically prompts you to update the commit messages and explains what’
       13 # Please enter the commit message for your changes. Lines starting
       14 # with '#' will be ignored, and an empty message aborts the commit.
       15 #
-      16 # Author:    castroad <castroad@yahoo-inc.com>
+      16 # Author:    Adriano Castro <ad@adrianocastro.net>
       17 #
       18 # Not currently on any branch.
       19 # Changes to be committed:
@@ -337,7 +333,7 @@ Git automatically prompts you to update the commit messages and explains what’
 
 ***
 
-The logs don’t lie:
+Like the hips, the logs don’t lie:
 
     $ git log --oneline
     1b16180 Added a .gitignore file.
