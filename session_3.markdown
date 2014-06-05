@@ -2,27 +2,22 @@
 
 - Session 1: The Basics
 - Session 2: Undoing Things
-- **Session 3: Using git with svn.corp**
+- **Session 3: Using git with svn**
 - Session 4: Branching and Merging
 - Session 5: Working with Remotes
 
 * * *
 
-## Session 3: Using git with svn.corp
+## Session 3: Using git with svn
 
 - Cloning from an svn repository
 - Diffing local with code in Subversion
-    - Creating code reviews in Review Board
 - Pulling changes from Subversion
 - Pushing changes to Subversion
 
 * * *
 
 ### Getting help
-
-IRC:
-
-- [\#zed-git](http://irc.corp.yahoo.com/join/zed-git) @ [irc.corp.yahoo.com](irc://irc.corp.yahoo.com/)
 
 Interactively:
 
@@ -39,11 +34,19 @@ Online:
 
 * * *
 
-### svn.corp as a remote repository
+### Assumptions for this session
+
+For the sake of this session we’re assuming that your company is still using SVN for code revision control.
+
+* * *
+
+### svn as a remote repository
 
 Up until now we’ve been working on local Git repositories. As a team we need to be able to share our code and push it to a central location.
 
-In the future this location will be a corp managed Git repository but, for now, we use good old svn.corp.
+This location would be your company’s managed Git repository or your personal repositories on Github, for example.
+
+In the case that your company is still using SVN, you can still take advantage of git to manage your work locally. 
 
 * * *
 
@@ -55,11 +58,7 @@ In the future this location will be a corp managed Git repository but, for now, 
 
 ### Getting git svn
 
-At Y!:
-
-    $ yinst install yapr-1.2.12_1 yapr_util-1.2.12_1 git_svn_y-test ysubversion-1.5.6_2 ysubversion_perl-1.5.6_6 git_core_y-test -downgrade
-
-Everywhere else: `git svn` should come bundled with Git.
+`git svn` should come bundled with Git.
 
 Try it:
 
@@ -71,15 +70,15 @@ Try it:
 
 Similarly to what we do with Subversion we start by checking out (or cloning in Git lingo) our remote Subversion repository:
 
-    $ git svn clone svn+ssh://svn.corp.yahoo.com/yahoo/users/castroad/scratch ~/git-svn-training
+    $ git svn clone svn+ssh://svn.corp.example.com/yourcompany/users/yourusername/scratch ~/git-svn-training
     Initialized empty Git repository in /tmp/git-svn-training/.git/
-    W: Ignoring error from SVN, path probably does not exist: (160013): Filesystem has no item: File not found: revision 100, path '/castroad/scratch'
+    W: Ignoring error from SVN, path probably does not exist: (160013): Filesystem has no item: File not found: revision 100, path '/yourusername/scratch'
     W: Do not be alarmed at the above message git-svn is just searching aggressively for old history.
     This may take a while on large repositories
     Checked Ahrough README
     r40377 = c2f37238a4701cf2a94cc8aa8f12bddcb2e3c11c (refs/remotes/git-svn)
     Checked out HEAD:
-      svn+ssh://svn.corp.yahoo.com/yahoo/users/castroad/scratch r40377
+      svn+ssh://svn.corp.example.com/yourcompany/users/yourusername/scratch r40377
 
 As you can see, this creates a new Git repository in the directory named `git-svn-training`, populates the Git history with all Subversion commits to the trunk, and checks out the latest HEAD.
 
@@ -95,7 +94,7 @@ Let’s add our name to `users`.
 To see how our repository has changed from Subversion we can `git diff` to the last known code we pulled from SVN:
 
     $ git log
-    062a8b8 Added castroad to the users file.
+    062a8b8 Added yourusername to the users file.
     6a00e22 Added users file.
     5ebc4b3 Added user file.
     c2f3723 Created scratch and added README.
@@ -106,11 +105,9 @@ To see how our repository has changed from Subversion we can `git diff` to the l
     --- a/users
     +++ b/users
     @@ -0,0 +1 @@
-    +castroad
+    +yourusername
 
 Or we can use `git svn-diff` which automagically knows what that commit is:
-
-    $ yinst i git_svn_diff-current
 
     $ git svn-diff
     Index: users
@@ -118,23 +115,7 @@ Or we can use `git svn-diff` which automagically knows what that commit is:
     --- users       (revision 40381)
     +++ users       (working copy)
     @@ -0,0 +1 @@
-    +castroad
-
-* * *
-
-#### Creating code reviews in Review Board
-
-Let’s start by installing `crpost`:
-
-    $ yinst i crpost
-
-In addition to knowing what was the last commit you pulled from Subversion `git svn-diff` also happens to create diffs in `crpost` friendly `svn diff` format.
-
-Friendly `git svn-diff` comes to the rescue, again:
-
-    $ git svn-diff | crpost --bug-id 5521451 --reviewer castroad --create
-    Backyard password (castroad): butterflies
-    Created review 98767 [ http://codereview.corp.yahoo.com/r/98767 ]
+    +yourusername
 
 * * *
 
@@ -162,7 +143,7 @@ You’ve finished your feature/bug, tested it thoroughly, had it code-reviewed a
 
     # Now lets push our code
     $ git svn dcommit
-    Committing to svn+ssh://svn.corp.yahoo.com/yahoo/users/castroad/scratch ...
+    Committing to svn+ssh://svn.corp.example.com/yourcompany/users/yourusername/scratch ...
             M       users
     Committed r40382
             M       users
