@@ -64,12 +64,12 @@ Read more about the [different types of version control systems](http://progit.o
 * * *
 
 ### Centralized VCS
-![Centralized version control diagram](http://progit.org/figures/ch1/18333fig0102-tn.png)
+![Centralized version control diagram](http://git-scm.com/figures/18333fig0102-tn.png)
 
 * * *
 
 ### Distributed VCS
-![Distributed version control diagram](http://progit.org/figures/ch1/18333fig0103-tn.png)
+![Distributed version control diagram](http://git-scm.com/figures/18333fig0103-tn.png)
 
 * * *
 
@@ -167,7 +167,7 @@ Git will reply: `Initialized empty Git repository in .git/`
 - **staged**
     - modified file has been marked in its current version as ready to be committed
 
-![The lifecycle of the status of your files](http://progit.org/figures/ch2/18333fig0201-tn.png)
+![The lifecycle of the status of your files](http://git-scm.com/figures/18333fig0201-tn.png)
 
 * * *
 
@@ -180,7 +180,7 @@ Git will reply: `Initialized empty Git repository in .git/`
 - **staging** (aka index)
     - where **staged** files live
 
-![Working directory, staging area, and git directory](http://progit.org/figures/ch1/18333fig0106-tn.png)
+![Working directory, staging area, and git directory](http://git-scm.com/figures/18333fig0106-tn.png)
 
 * * *
 
